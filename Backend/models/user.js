@@ -1,0 +1,57 @@
+const moongoose=require("moongoose")
+
+const user=new moongoose.schema(
+    {
+        username:
+        {
+            type:String,
+            required:true,
+            unique:true
+        },
+        email:
+        {
+            type:String,
+            required:true,
+            unique:true
+        },
+        password:
+        {
+            type:String,
+            required:true,
+        },
+        address:
+        {
+            type:String,
+            require:true
+        },
+        avatar:
+        {
+            type:String,
+            default:"https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
+        },
+        role:
+        {
+            type:String,
+            default:"user",
+            enum:["user","admin"],
+        },
+        favourites:
+        {
+            type:moongoose.Types.ObjectId,
+            ref:"books",
+        },
+        cart:
+        {
+            type:moongoose.Types.ObjectId,
+            ref:"books",
+        },
+        order:
+        {
+            type:moongoose.Types.ObjectId,
+            ref:"order",
+        },
+    },
+    {timestamps:true}
+
+)
+module.exports=moongoose.model("user",user)
